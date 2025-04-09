@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { ExamService } from './exam.service';
 import { Exam } from './schemas/exam.schema';
 
@@ -9,5 +9,15 @@ export class ExamController {
   @Post()
   async createExam(@Body() body: Exam) {
     return this.examService.create(body);
+  }
+
+  @Get('all')
+async getAllExams() {
+  return this.examService.findAll();
+}
+
+  @Get()
+  async getExamsByTitle(@Query('title') title: string) {
+    return this.examService.findByTitle(title);
   }
 }

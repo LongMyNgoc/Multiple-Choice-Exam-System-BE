@@ -11,4 +11,10 @@ export class ExamService {
     const createdExam = new this.examModel(examData);
     return createdExam.save();
   }
+  async findAll(): Promise<Exam[]> {
+    return this.examModel.find().exec();
+  }  
+  async findByTitle(title: string): Promise<Exam[]> {
+    return this.examModel.find({ title: new RegExp(title, 'i') }).exec();
+  }
 }
