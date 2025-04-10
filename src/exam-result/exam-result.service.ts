@@ -13,4 +13,7 @@ export class ExamResultService {
         const result = new this.examResultModel(data);
         return result.save();
     }
+    async findByUserEmail(userEmail: string): Promise<ExamResult[]> {
+        return this.examResultModel.find({ userEmail }).exec();
+    }    
 }

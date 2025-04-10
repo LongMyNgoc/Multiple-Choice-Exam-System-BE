@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Query, Get } from '@nestjs/common';
 import { ExamResultService } from './exam-result.service';
 import { ExamResult } from './exam-result.schema';
 
@@ -9,5 +9,9 @@ export class ExamResultController {
     @Post()
     async submitResult(@Body() body: Partial<ExamResult>) {
         return this.examResultService.create(body);
+    }
+    @Get()
+    async getResultsByUser(@Query('userEmail') userEmail: string) {
+        return this.examResultService.findByUserEmail(userEmail);
     }
 }
