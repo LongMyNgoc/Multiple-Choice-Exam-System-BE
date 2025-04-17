@@ -8,7 +8,14 @@ export class ExamResultController {
 
     @Post()
     async submitResult(@Body() body: Partial<ExamResult>) {
-        return this.examResultService.create(body);
+        try {
+            return await this.examResultService.create(body);
+        } catch (error) {
+            return {
+                success: false,
+                message: error.message || 'Failed to submit exam result',
+            };
+        }
     }
     @Get()
     async getResultsByUser(@Query('userEmail') userEmail: string) {

@@ -9,10 +9,25 @@ export class ExamResultService {
         @InjectModel(ExamResult.name) private examResultModel: Model<ExamResultDocument>,
     ) { }
 
-    async create(data: Partial<ExamResult>): Promise<ExamResult> {
-        const result = new this.examResultModel(data);
+    async create(data: Partial<ExamResult>): Promise<ExamResult | null> {
+        const existing = await this.examResultModel.findOne({
+            userEmail: data.userEmail,
+            title: data.title,
+        });
+    
+        if (existing) {
+            // Nếu đã tồn tại kết quả với userEmail và title này, không cho nộp lại
+            throw new Error('User has already submitted the exam for this exam.');
+        }
+    
+        const result = new this.examResultModel({
+            ...data,
+            submittedAt: new Date(), // đảm bảo có submittedAt
+        });
+    
         return result.save();
     }
+    
     async findByUserEmail(userEmail: string): Promise<ExamResult[]> {
         return this.examResultModel.find({ userEmail }).exec();
     }
