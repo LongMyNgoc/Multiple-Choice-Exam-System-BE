@@ -7,7 +7,7 @@ import { ExamResult, ExamResultDocument } from './exam-result.schema';
 export class ExamResultService {
     constructor(
         @InjectModel(ExamResult.name) private examResultModel: Model<ExamResultDocument>,
-    ) {}
+    ) { }
 
     async create(data: Partial<ExamResult>): Promise<ExamResult> {
         const result = new this.examResultModel(data);
@@ -15,5 +15,16 @@ export class ExamResultService {
     }
     async findByUserEmail(userEmail: string): Promise<ExamResult[]> {
         return this.examResultModel.find({ userEmail }).exec();
-    }    
+    }
+    // exam-result.service.ts
+    async findAll(): Promise<ExamResult[]> {
+        return this.examResultModel.find().exec();
+    }
+    async findByTitle(title: string): Promise<ExamResult[]> {
+        return this.examResultModel.find({ title }).exec();
+    }
+    
+    async findByTitleAndUserEmail(title: string, userEmail: string): Promise<ExamResult | null> {
+        return this.examResultModel.findOne({ title, userEmail }).exec();
+    }
 }
