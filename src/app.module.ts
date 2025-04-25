@@ -8,7 +8,7 @@ import { ExamResultModule } from './exam-result/exam-result.module';
 @Module({
   imports: [
     // 👇 Đây là nơi bạn kết nối đến MongoDB (local)
-    MongooseModule.forRoot('mongodb://localhost:27017/quizApp'), 
+    MongooseModule.forRoot('mongodb://mongo:lIEJwUhyMDJaAizGRvvLpNfAMBmwWBYw@interchange.proxy.rlwy.net:54666'), 
     ExamModule,
     ExamResultModule,
   ],
