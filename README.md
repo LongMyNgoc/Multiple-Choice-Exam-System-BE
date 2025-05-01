@@ -62,5 +62,5 @@ Mọi ý kiến đóng góp hoặc báo lỗi có thể được gửi qua hệ 
 5. Tạo Pull Request.
 
 ## Thông Tin Liên Hệ
-📧 Email: nguyenphilong.dev@gmail.com <br>
-📌 GitHub: [LongMyNgoc](https://github.com/LongMyNgoc) <br>
+- 📧 Email: nguyenphilong.dev@gmail.com <br>
+- 🌐 Portfolio: https://nguyenphilongportfolio.vercel.app/
