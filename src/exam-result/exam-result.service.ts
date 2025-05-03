@@ -33,8 +33,19 @@ export class ExamResultService {
     }
     // exam-result.service.ts
     async findAll(): Promise<ExamResult[]> {
-        return this.examResultModel.find().exec();
+        return this.examResultModel.aggregate([
+            {
+                $group: {
+                    _id: "$title",            // Nhóm theo title
+                    doc: { $first: "$$ROOT" } // Giữ lại bản ghi đầu tiên
+                }
+            },
+            {
+                $replaceRoot: { newRoot: "$doc" } // Trả về document gốc
+            }
+        ]);
     }
+    
     async findByTitle(title: string): Promise<ExamResult[]> {
         return this.examResultModel.find({ title }).exec();
     }
